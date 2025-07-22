@@ -7,6 +7,7 @@
 #define BOARD_SIZE 8
 #define TILE_SIZE 42
 #define TILE_TYPES 5
+#define SCORE_FONT_SIZE 32
 
 const char tile_chars[TILE_TYPES] = {'#', '@', '$', '%', '&'};
 const int font_size = 20;
@@ -19,6 +20,7 @@ char board[BOARD_SIZE][BOARD_SIZE];
 Vector2 grid_origin;
 
 Texture2D background;
+Font score_font;
 
 char RandomTile(){
     return tile_chars[rand() % TILE_TYPES];
@@ -70,6 +72,7 @@ int main(void){
     srand(time(NULL));
 
     background = LoadTexture("assets/background.jpg");
+    score_font = LoadFontEx("assets/04b03.ttf",SCORE_FONT_SIZE, NULL, 0);
     InitBoard();
 
     while (!WindowShouldClose()) {
@@ -91,7 +94,10 @@ int main(void){
 
 
         DrawTiles();
-        DrawText(TextFormat("SCORE: %d", score), 20, 400, 40, YELLOW);
+        DrawTextEx(
+            score_font, TextFormat("SCORE: %d", score),
+            (Vector2){20, 405}, SCORE_FONT_SIZE, 1.0f, YELLOW
+        );
         EndDrawing();
     }
 
