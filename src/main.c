@@ -14,6 +14,7 @@ const int font_spacing = 1;
 const int screen_width = 1200;
 const int screen_height = 800;
 
+int score = 220;
 char board[BOARD_SIZE][BOARD_SIZE];
 Vector2 grid_origin;
 
@@ -34,7 +35,7 @@ void InitBoard(){
 
     grid_origin = (Vector2){
         ((screen_width / 2) - grid_width) / 2, //GetScreenWidth()
-        screen_height - (grid_height + TILE_SIZE * 0.9)   // GetScreenHeight() (screen_height - grid_height) / 2
+        screen_height - (grid_height + TILE_SIZE * 0.7)   // GetScreenHeight() (screen_height - grid_height) / 2
     };
 
 }
@@ -88,7 +89,9 @@ int main(void){
         WHITE
         );
 
+
         DrawTiles();
+        DrawText(TextFormat("SCORE: %d", score), 20, 400, 40, YELLOW);
         EndDrawing();
     }
 
